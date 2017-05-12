@@ -1,19 +1,24 @@
 ﻿function Get-SPRContentDeploymentSettings
 {
-  param
-  (
-    [Parameter(Mandatory = $true)]
-    [object[]]$XXX
-  )
 	
-  foreach ($XXX in $XXXs)
-  {
+$cs=[Microsoft.SharePoint.Publishing.Administration.ContentDeploymentConfiguration]::GetInstance()
+
+if($cs.AcceptIncomingJobs)
+{
     $properties = [ordered]@{
-      'SettingName' = $XXX
-      'Value'     = $XXX
-    }
+      'AcceptIncomingJobs' = $cs.AcceptIncomingJobs
+      'ExportWebServer'     = $cs.ExportWebServer
+      'ImportWebServer'=$cs.ImportWebServer
+      'TemporaryFolder'=$cs.TemporaryFolder
+      'RequireSecureConnection'=$cs.RequiresSecureConnection
+      }
+ }
+ else{
+     $properties = [ordered]@{
+      'AcceptIncomingJobs' = $cs.AcceptIncomingJobs
+      }
+ }   
     $output = New-Object -TypeName PSObject -Property $properties
 		
     Write-Output -InputObject $output
-  }
 }
