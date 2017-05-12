@@ -14,16 +14,16 @@
   {
     $properties = [ordered]@{
       'Name'             = $contentDatabase.Name
-      'Status'           = $XXX
-      'Server'           = $XXX
-      'WebApplication'   = $XXX
-      'CurrentSiteCount' = $XXX
-      'WarningSiteCount' = $XXX
-      'MaximumSiteCount' = $XXX
-      'AuthenticationType' = $XXX
-      'ReadOnly'         = $XXX
-      'RecoveryModel'    = $XXX
-      'TotalSize'        = $XXX
+      'Status'           = $contentDatabase.Status
+      'Server'           = $contentDatabase.Server
+      'WebApplication'   = $contentDatabase.WebApplication.Url
+      'CurrentSiteCount' = $contentDatabase.CurrentSiteCount
+      'WarningSiteCount' = $contentDatabase.WarningSiteCount
+      'MaximumSiteCount' = $contentDatabase.MaximumSiteCount
+      'AuthenticationType' = $xxx
+      'ReadOnly'         = $contentDatabase.IsReadOnly
+      'RecoveryModel'    = $xxx
+      'TotalSize'        = $contentDatabase.DiskSizeRequired
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
