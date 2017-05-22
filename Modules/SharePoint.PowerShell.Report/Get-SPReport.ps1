@@ -157,6 +157,25 @@
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties DisplayName,SuperUserAcount,SuperUserHasFullControl,SuperReaderAcount,SuperReaderHasFullRead
+
+  #region TsokovInput
+
+  $title = 'Web Application Cross FireWall Access Zone'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRCrossFirewallAccessZone -SPWebApplication $SPRObjects.SPWebApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties WebApplication, CrossFirewallAccessZone 
+
+   $title = 'Content Databases'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRContentDatabases -SPDatabase $SPRObjects.SPDatabase |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Name, Status, Server, WebApplication, CurrentSiteCount, WarningSiteCount, MaximumSiteCount, AuthenticationType, ReadOnly, RecoveryModel, TotalSize 
+  
+  
+  #endregion
                  
   $css = @"
     body {

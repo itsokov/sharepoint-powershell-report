@@ -3,14 +3,18 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPWebApplication
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($WebApp in $SPWebApplication)
   {
+    $crossFirewallAccessZone = $WebApp.ExternalURLZone
+    if($crossFirewallAccessZone -eq $null){$crossFirewallAccessZone = 'none'}
+
     $properties = [ordered]@{
-      'WebApplication'        = $XXX
-      'CrossFirewallAccessZone' = $XXX
+      'WebApplication'        = $WebApp.DisplayName
+     
+      'CrossFirewallAccessZone' = $crossFirewallAccessZone
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
