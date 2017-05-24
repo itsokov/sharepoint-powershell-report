@@ -3,19 +3,19 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPWebApplications
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($WebApp in $SPWebApplications)
   {
     $properties = [ordered]@{
-      'WebApplication'                 = $XXX
-      'InheritTheGlovalSettings'       = $XXX
-      'EnableTheseDataRetrievalServices' = $XXX
-      'EnableUpdateQuerySupport'       = $XXX
-      'EnableTheseDataSourceControles' = $XXX
-      'ResponseSizeLimit'              = $XXX
-      'RequestTimeOut'                 = $XXX
+      'WebApplication'                 = $WebApp.DisplayName
+      'InheritTheGlobalSettings'       = $WebApp.InheritDataRetrievalSettings
+      'EnableTheseDataRetrievalServices' = $WebApp.DataRetrievalProvider.Enabled
+      'EnableUpdateQuerySupport'       = $WebApp.DataRetrievalProvider.UpdateAllowed
+      'EnableTheseDataSourceControles' = $WebApp.DataRetrievalProvider.OleDbProviders
+      'ResponseSizeLimit'              = $WebApp.DataRetrievalProvider.MaximumResponseSize
+      'RequestTimeOut'                 = $WebApp.DataRetrievalProvider.RequestTimeOut
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

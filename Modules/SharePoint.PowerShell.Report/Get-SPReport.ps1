@@ -174,7 +174,35 @@
   -PreContent "<h2>$title</h2>" `
   -Properties Name, Status, Server, WebApplication, CurrentSiteCount, WarningSiteCount, MaximumSiteCount, AuthenticationType, ReadOnly, RecoveryModel, TotalSize 
   
+   $title = 'DATA RETRIEVAL SERVICES'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRDataRetrievalServices -SPWebApplication $SPRObjects.SPWebApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties WebApplication, InheritTheGlobalSettings, EnableTheseDataRetrievalServices, EnableUpdateQuerySupport, EnableTheseDataSourceControles, ResponseSizeLimit, RequestTimeOut 
   
+   $title = 'Content Deployment Settings'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRContentDeploymentSettings -SPContentDeploymentSettings $SPRObjects.SPContentDeploymentSettings|
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties AcceptIncomingJobs, ExportWebServer, ImportWebServer, TemporaryFolder, RequireSecureConnection
+
+   $title = 'Diagnostic Logging Settings'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRDiagnosticLoggingSettings -SPDiagConfig $SPRObjects.SPDiagnosticLogging |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties AllowLegacyTraceProviders, AppAnalyticsAutomaticUploadEnabled, CustomerExperienceImprovementProgramEnabled, DaysToKeepLogs, DownloadErrorReportingUpdatesEnabled, ErrorReportingAutomaticUploadEnabled, ErrorReportingEnabled, EventLogFloodProtectionEnabled, EventLogFloodProtectionNotifyInterval, EventLogFloodProtectionQuietPeriod, EventLogFloodProtectionThreshold, EventLogFloodProtectionTriggerPeriod, LogCutInterval, LogDiskSpaceUsageGB, LogLocation, LogMaxDiskSpaceUsageEnabled, ScriptErrorReportingDelay, ScriptErrorReportingEnabled, ScriptErrorReportingRequireAuth
+
+  $title = 'DISTRIBUTED CACHE CONFIG'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRDistributedCacheConfig -SPCacheClusterConfig $SPRObjects.SPCacheClusterConfig -SPCacheHost $SPRObjects.SPCacheHost |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Host, Size, CachePort,ClusterPort,ReplicationPort,ArbitrationPort, Status
+
+
   #endregion
                  
   $css = @"
