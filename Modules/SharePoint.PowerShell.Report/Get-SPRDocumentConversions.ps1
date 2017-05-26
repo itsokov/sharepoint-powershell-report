@@ -3,22 +3,33 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPWebApplication
   )
-	
-  foreach ($XXX in $XXXs)
+
+  foreach ($WebApp in $SPWebApplication)
   {
-    $properties = [ordered]@{
-      'WebApplication' = $XXX
-      'Converter'    = $XXX
-      'Type'         = $XXX
-      'AllLibraries' = $XXX
-      'Timeout'      = $XXX
-      'MaxRetries'   = $XXX
-      'MaxFileSize'  = $XXX
+  $DConversionEnabled=$WebApp.DocumentConversionsEnabled
+
+  if ($DConversionEnabled) {
+
+    foreach ($converter in $WebApp.DocumentConverters)
+    {
+    
+       $properties = [ordered]@{
+      'WebApplication' = $WebApp.DisplayName
+      'Converter'    = $converter.DisplayName
+      'Type'         = [string]$converter.ConvertFrom + '>' + [string]$converter.ConvertTo
+      'Timeout'      = $converter.Timeout
+      'MaxRetries'   = $converter.Retries
+      'MaxFileSize'  = $converter.MaxFileSize
     }
-    $output = New-Object -TypeName PSObject -Property $properties
-		
-    Write-Output -InputObject $output
+     $output = New-Object -TypeName PSObject -Property $properties	
+     Write-Output -InputObject $output
+    
+    }
+
+   }
+  
+
   }
 }

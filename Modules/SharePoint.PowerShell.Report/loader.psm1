@@ -134,3 +134,6 @@
 . $PSScriptRoot\Export-SPRCacheClusterConfig.ps1
 . $PSScriptRoot\Get-SPRDistributedCacheConfig.ps1
 . $PSScriptRoot\Export-SPRCacheHost.ps1
+. $PSScriptRoot\Export-SPRLogLevel.ps1
+. $PSScriptRoot\Export-SPRFarmAdmins.ps1
+. $PSScriptRoot\Export-SPRWebServices.ps1

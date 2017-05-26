@@ -3,14 +3,14 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPFarmAdmins
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($SPFarmAdmin in $SPFarmAdmins)
   {
     $properties = [ordered]@{
-      'SettingName' = $XXX
-      'Value'     = $XXX
+      'Login' = $SPFarmAdmin.UserLogin
+      'DisplayName'     = $SPFarmAdmin.DisplayName
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

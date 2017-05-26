@@ -3,15 +3,15 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPLogLevels
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($SPLogLevel in $SPLogLevels)
   {
     $properties = [ordered]@{
-      'Name'        = $XXX
-      'EventSeverity' = $XXX
-      'TraceSeverity' = $XXX
+      'Name'        = $SPLogLevel.Name
+      'EventSeverity' = $SPLogLevel.EventSeverity
+      'TraceSeverity' = $SPLogLevel.TraceSeverity
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

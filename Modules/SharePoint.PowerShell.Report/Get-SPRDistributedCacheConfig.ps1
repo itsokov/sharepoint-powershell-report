@@ -22,17 +22,12 @@ foreach ($entry in $SPCacheClusterConfig.configuration.dataCache.hosts.host)
             'ArbitrationPort' = $entry.ArbitrationPort
             'Status'        = $o2.status.tostring()
             }
+        $output = New-Object -TypeName PSObject -Property $properties
+        Write-Output -InputObject $output
         } 
 
     }
 
 }
-
-
-  
-  $output = New-Object -TypeName PSObject -Property $properties
-		
-   Write-Output -InputObject $output
-  
 
 }
