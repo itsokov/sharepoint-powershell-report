@@ -203,6 +203,35 @@
   -Properties Host, Size, CachePort,ClusterPort,ReplicationPort,ArbitrationPort, Status
 
 
+  $title = 'Document Conversions'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRDocumentConversions -SPWebApplication $SPRObjects.SPWebApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties WebApplication, Converter, Type, Timeout, MaxRetries, MaxFileSize
+
+  
+  $title = 'Event Throttling'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPREventThrottling -SPLogLevels $SPRObjects.SPLogLevel |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Name, EventSeverity, TraceSeverity
+
+  $title = 'Farm Administrators'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRFarmAdministrators -SPFarmAdmins $SPRObjects.SPFarmAdmins |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Login,DisplayName
+
+  $title = 'Antivirus Settings'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRFarmAntivirusSettings -SPWebServices $SPRObjects.SPWebServices |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties DownloadScanEnabled,UploadScanEnabled,AllowDownload,CleaningEnabled,Timeout,NumberOfThreads
+
   #endregion
                  
   $css = @"

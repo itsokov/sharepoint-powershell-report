@@ -34,6 +34,9 @@
   Export-SPRContentDeploymentSettings -Path $Path
   Export-SPRCacheClusterConfig -Path $Path
   Export-SPRCacheHost -Path $Path
+  Export-SPRLogLevel -Path $Path
+  Export-SPRFarmAdmins -Path $Path
+  Export-SPRWebServices -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
   $null = Get-Job |
