@@ -129,3 +129,8 @@
 . $PSScriptRoot\Get-SPRWebApplicationWebPartSecurity.ps1
 . $PSScriptRoot\Get-SPRWebApplicationWorkflowSettings.ps1
 . $PSScriptRoot\Export-SPRAuthenticationProvider.ps1
+. $PSScriptRoot\Export-SPRDiagnosticLogging.ps1
+. $PSScriptRoot\Export-SPRContentDeploymentSettings.ps1
+. $PSScriptRoot\Export-SPRCacheClusterConfig.ps1
+. $PSScriptRoot\Get-SPRDistributedCacheConfig.ps1
+. $PSScriptRoot\Export-SPRCacheHost.ps1

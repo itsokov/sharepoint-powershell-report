@@ -1,19 +1,22 @@
 ﻿function Get-SPRContentDeploymentSettings
 {
-  param
+	
+ param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPContentDeploymentSettings
   )
-	
-  foreach ($XXX in $XXXs)
-  {
+
+
     $properties = [ordered]@{
-      'SettingName' = $XXX
-      'Value'     = $XXX
-    }
+      'AcceptIncomingJobs' = $SPContentDeploymentSettings.AcceptIncomingJobs
+      'ExportWebServer'     = $SPContentDeploymentSettings.ExportWebServer
+      'ImportWebServer'=$SPContentDeploymentSettings.ImportWebServer
+      'TemporaryFolder'=$SPContentDeploymentSettings.TemporaryFolder
+      'RequireSecureConnection'=$SPContentDeploymentSettings.RequiresSecureConnection
+      }
+   
     $output = New-Object -TypeName PSObject -Property $properties
 		
     Write-Output -InputObject $output
-  }
 }

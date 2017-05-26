@@ -30,6 +30,10 @@
   Export-SPRManagedAccount -Path $Path
   Export-SPRAlternateUrl -Path $Path
   Export-SPRAuthenticationProvider -Path $Path
+  Export-SPRDiagnosticLogging -Path $Path
+  Export-SPRContentDeploymentSettings -Path $Path
+  Export-SPRCacheClusterConfig -Path $Path
+  Export-SPRCacheHost -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
   $null = Get-Job |
