@@ -3,20 +3,35 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPFarmFeatures,
+    [Parameter(Mandatory = $true)]
+    [object[]]$SPWebServicesAdministration
   )
 	
-  foreach ($XXX in $XXXs)
+$FarmFeatures=$SPFarmFeatures | ? {$_.Scope.value -eq "Farm"}
+$ActiveFarmFeatures=$SPWebServicesAdministration
+
+  foreach ($FarmFeature in $FarmFeatures)
   {
+    $isactive=$false
+    foreach ($ActiveFarmFeature in $ActiveFarmFeatures) {
+   
+    if ($FarmFeature.id -eq $ActiveFarmFeature.definitionid) {$isactive=$true} 
+    
+    }
     $properties = [ordered]@{
-      'Title'  = $XXX
-      'Version' = $XXX
-      'Active' = $XXX
-      'FileSize' = $XXX
+      'Title'  = $FarmFeature.DisplayNameEN
+      'Id'     = $FarmFeature.id
+      'Solution' = $FarmFeature.SolutionID
+      'Version' = $FarmFeature.Version
+      'Active' = $isactive
+      'Hidden' = $FarmFeature.Hidden
       'Custom' = $XXX
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
     Write-Output -InputObject $output
+
+    
   }
 }

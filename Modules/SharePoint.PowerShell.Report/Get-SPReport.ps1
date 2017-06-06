@@ -232,6 +232,14 @@
   -PreContent "<h2>$title</h2>" `
   -Properties DownloadScanEnabled,UploadScanEnabled,AllowDownload,CleaningEnabled,Timeout,NumberOfThreads
 
+    $title = 'Farm Features'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRFarmFeatures -SPWebServicesAdministration $SPRObjects.SPWebServicesAdministration -SPFarmFeatures $SPRObjects.SPFeature |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Title,ID,Solution,Version,Active,Hidden
+
+
   #endregion
                  
   $css = @"
