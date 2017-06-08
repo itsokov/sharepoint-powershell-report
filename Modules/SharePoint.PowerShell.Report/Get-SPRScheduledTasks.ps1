@@ -1,13 +1,9 @@
 ﻿function Get-SPRScheduledTasks
 {
-   # param
-   # (
-     # [Parameter(Mandatory = $false)]
-     # [object[]]$t
-   # )
-	$tasks = Get-ScheduledTask
+  $tasks = Get-ScheduledTask
   foreach ($t in $tasks)
   {
+	#this check is added so that we do not display the default microsoft windows scheduled tasks
 	if (-Not ($t.taskpath.Contains('Microsoft\Windows'))) {
 		$properties = [ordered]@{
 		  'TaskName' = $t.TaskName

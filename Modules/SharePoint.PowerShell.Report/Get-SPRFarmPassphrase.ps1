@@ -1,12 +1,7 @@
 ﻿function Get-SPRFarmPassphrase
 {
-  param
-  (
-    [Parameter(Mandatory = $false)]
-    [object[]]$SPWebApplication
-  )
-	
     $properties = [ordered]@{
+	#TODO: find a way to get the passphrase
       'Passphrase'    = 'Get the passphrase'
     }
     $output = New-Object -TypeName PSObject -Property $properties
