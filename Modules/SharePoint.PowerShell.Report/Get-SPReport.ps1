@@ -237,7 +237,7 @@
   $report += Get-SPRFarmFeatures -SPWebServicesAdministration $SPRObjects.SPWebServicesAdministration -SPFarmFeatures $SPRObjects.SPFeature |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
-  -Properties Title,ID,Solution,Version,Active,Hidden
+  -Properties Title,ID,SolutionID,SolutionName,Version,Active,Hidden,Custom
 
 
   #endregion
