@@ -137,3 +137,6 @@
 . $PSScriptRoot\Export-SPRLogLevel.ps1
 . $PSScriptRoot\Export-SPRFarmAdmins.ps1
 . $PSScriptRoot\Export-SPRWebServices.ps1
+. $PSScriptRoot\Get-SPRFarmPassphrase.ps1
+. $PSScriptRoot\Export-SPRScheduledTasks.ps1
+. $PSScriptRoot\Get-SPRScheduledTasks.ps1
