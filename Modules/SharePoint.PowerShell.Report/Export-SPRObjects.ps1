@@ -38,9 +38,10 @@
   Export-SPRFarmAdmins -Path $Path
   Export-SPRWebServices -Path $Path
   Export-SPRWebServicesAdministration -Path $Path
+  Export-SPRScheduledTasks -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
-  $null = Get-Job |
+  $null = Get-Job | 
   Wait-Job
   Write-Host -Object 'Done.'
 
