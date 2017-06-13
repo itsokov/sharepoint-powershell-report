@@ -37,6 +37,7 @@
   Export-SPRLogLevel -Path $Path
   Export-SPRFarmAdmins -Path $Path
   Export-SPRWebServices -Path $Path
+  Export-SPRWebServicesAdministration -Path $Path
   Export-SPRScheduledTasks -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
