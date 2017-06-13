@@ -3,18 +3,19 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$Topologies
   )
-	
-  foreach ($XXX in $XXXs)
+
+
+  foreach ($Topology in $Topologies)
   {
     $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'Topology'         = $XXX
-      'CreationDate'     = $XXX
-      'State'            = $XXX
-      'ComponentCount'   = $XXX
-      'IsActive'         = $XXX
+      'ServiceApplication' = $Topology.Name
+      'Topology'         = $Topology.TopologyId
+      'CreationDate'     = $Topology.CreationDate
+      'State'            = $Topology.State
+      'ComponentCount'   = $Topology.ComponentCount
+      'IsActive'         = $Topology.State
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
