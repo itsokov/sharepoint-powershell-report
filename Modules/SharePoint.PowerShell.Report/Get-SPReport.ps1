@@ -232,6 +232,34 @@
   -PreContent "<h2>$title</h2>" `
   -Properties DownloadScanEnabled,UploadScanEnabled,AllowDownload,CleaningEnabled,Timeout,NumberOfThreads
 
+  $title = 'QuotaTemplate'
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRQuotaTemplates -Quotas $SPRObjects.SPRQuota |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties TemplateName,StorageMaximumLevel,StorageWarningLevel,InvitedUserMaximumLevel,UserCodeMaximumLevel,UserCodeWarningLevel
+
+   $title = 'SearchTopologies'
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRSearchTopologies -Topologies $SPRObjects.ActiveSearchTopology |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication,Topology,CreationDate,State,ComponentCount,IsActive
+
+   $title = 'SearchComponent'
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRSearchComponents -SearchComponents $SPRObjects.SearchComponent |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Name,Server,ServiceApplication,Topology,IsActive
+
+  $title = 'SearchIndex'
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRSearchIndexPartitions -IndexPartitions $SPRObjects.SearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Name,Server,ServiceApplication,Topology,RootDirectory,IndexLocation,Role,Service,Status
+
   #endregion
                  
   $css = @"

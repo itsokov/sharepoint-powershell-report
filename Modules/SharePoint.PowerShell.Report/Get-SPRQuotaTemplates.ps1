@@ -3,21 +3,24 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$Quotas
   )
-	
-  foreach ($XXX in $XXXs)
-  {
+   
+
+    foreach ($Q in $Quotas){
+    
     $properties = [ordered]@{
-      'TemplateName'          = $XXX
-      'StorageMaximumLevel'   = $XXX
-      'InvitedUserMaximumLevel' = $XXX
-      'UserCodeMaximumLevel'  = $XXX
-      'UserCodeWarningLevel'  = $XXX
-      'WarningLevelEmail'     = $XXX
+      'TemplateName'          = $Q.Name
+      'StorageMaximumLevel'   = $Q.StorageMaximumLevel
+      'StorageWarningLevel'   = $Q.StorageWarningLevel
+      'InvitedUserMaximumLevel' = $Q.InvitedUserMaximumLevel
+      'UserCodeMaximumLevel'  = $Q.UserCodeMaximumLevel
+      'UserCodeWarningLevel'  = $Q.UserCodeWarningLevel
+      #'WarningLevelEmail'     = $xxx
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
     Write-Output -InputObject $output
   }
+  
 }

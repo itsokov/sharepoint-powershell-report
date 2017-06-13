@@ -3,17 +3,23 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SearchComponents
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($SearchComponent in $SearchComponents)
   {
+  Add-PSSnapin -Name Microsoft.SharePoint.PowerShell -ErrorAction SilentlyContinue
+
+  $searchapp= Get-SPEnterpriseSearchServiceApplication -Identity 'e06695d8-4081-4fba-a64a-8a645d9fe2a6'
+  $Topologies = Get-SPEnterpriseSearchTopology -SearchApplication $searchapp -active
+
     $properties = [ordered]@{
-      'Name'             = $XXX
-      'Topology'         = $XXX
-      'ServiceApplication' = $XXX
-      'Server'           = $XXX
-      'Type'             = $XXX
+      'Name'             = $SearchComponent.Name
+      'Topology'         = $SearchComponent.TopologyId
+      'ServiceApplication' = $searchapp.Name
+      'Server'           = $SearchComponent.ServerName
+      'Type'             = $SearchComponent
+      'IsActive'         = $Topologies.State
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
