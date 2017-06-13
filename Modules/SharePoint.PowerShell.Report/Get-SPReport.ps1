@@ -231,6 +231,29 @@
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties DownloadScanEnabled,UploadScanEnabled,AllowDownload,CleaningEnabled,Timeout,NumberOfThreads
+  
+  $title = 'Farm Passphrase'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRFarmPassphrase |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Passphrase
+  
+    $title = 'Scheduled Tasks'    
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRScheduledTasks -ScheduledTasks $SPRObjects.SPTasks |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties TaskName, State, Description, Source, URI, Version
+  
+
+    $title = 'Farm Features'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRFarmFeatures -SPWebServicesAdministration $SPRObjects.SPWebServicesAdministration -SPFarmFeatures $SPRObjects.SPFeature |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties Title,ID,SolutionID,SolutionName,Version,Active,Hidden,Custom
+
 
   $title = 'QuotaTemplate'
   Write-Host -Object "Building section: $title"
