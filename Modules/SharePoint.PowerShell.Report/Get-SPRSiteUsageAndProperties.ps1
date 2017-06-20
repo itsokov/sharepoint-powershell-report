@@ -3,18 +3,19 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPSite
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($site in $SPSite)
   {
     $properties = [ordered]@{
-      'SiteCollection' = $XXX
-      'Language'     = $XXX
-      'Template'     = $XXX
-      'NumberOfSites' = $XXX
-      'UIVersion'    = $XXX
-      'Storage'      = $XXX
+      'SiteCollectionTitle' = $site.RootWeb.Title
+      'SiteCollectionUrl' = $site.Url
+      'Language'     = $site.RootWeb.Language
+      'Template'     = $site.RootWeb.WebTemplate
+      'NumberOfSites' = $site.AllWebs.Count
+      'UIVersion'    = $site.RootWeb.UIVersion
+      'Storage'      = $site.Usage.Storage
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

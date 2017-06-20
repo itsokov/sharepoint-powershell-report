@@ -182,10 +182,19 @@
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties WebApplication, SiteCollectionTitle, SiteCollectionUrl, SiteCollectionContentDatabase, Owners
-
-
-
+  
   # 7.2.2	USAGE AND PROPERTIES
+  $title = 'Site Collections Usage and Properties'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSiteUsageAndProperties -SPSite $SPRObjects.SPSite |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties SiteCollectionTitle, SiteCollectionUrl, Language, Template, NumberOfSites, UIVersion, Storage
+
+
+
+
+
   
   # 7.2.3	QUOTA TEMPLATES
   $title = 'Quota Templates'
