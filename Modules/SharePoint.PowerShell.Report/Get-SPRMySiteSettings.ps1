@@ -3,18 +3,20 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPServiceApplicationUserProfiles,
+    [Parameter(Mandatory = $true)]
+    [object[]]$SPUserProfileManager
   )
-	
-  foreach ($XXX in $XXXs)
+
+  foreach ($userProfileServiceApplication in $SPServiceApplicationUserProfiles)
   {
     $properties = [ordered]@{
-      'ServiceApplication'    = $XXX
-      'Multilingual'          = $XXX
-      'ReadPermissionLevel'   = $XXX
-      'SenderEmailAddress'    = $XXX
-      'EnableNetbiosdomainName' = $XXX
-      'MySiteManagedPath'     = $XXX
+      'ServiceApplication'    = $userProfileServiceApplication.DisplayName
+      'Multilingual'          = $SPUserProfileManager.IsPersonalSiteMultipleLanguage
+      'ReadPermissionLevel'   = $SPUserProfileManager.PersonalSiteReaders
+      'SenderEmailAddress'    = $SPUserProfileManager.MySiteEmailSenderName
+      'EnableNetbiosdomainName' = $userProfileServiceApplication.NetBIOSDomainNamesEnabled
+      'MySiteManagedPath'     = $SPUserProfileManager.PersonalSiteInclusion
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

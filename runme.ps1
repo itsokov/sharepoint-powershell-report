@@ -33,9 +33,9 @@ if (Get-Module -Name $moduleName)
 }
 #endregion reload module
 
-#Export-SPRObjects -Path $exportPath
+Export-SPRObjects -Path $exportPath
 Get-SPReport -ExportPath $exportPath -FromExportedFiles -ReportFilePath $reportFilePath
-Invoke-Item $reportFilePath
+#Invoke-Item $reportFilePath
 
 
 

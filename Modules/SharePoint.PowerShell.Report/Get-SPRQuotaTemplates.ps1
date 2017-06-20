@@ -3,19 +3,19 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$Quotas
+    [object[]]$SPQuotaTemplate
   )
    
 
-    foreach ($Q in $Quotas){
+    foreach ($quotaTemplate in $SPQuotaTemplate){
     
     $properties = [ordered]@{
-      'TemplateName'          = $Q.Name
-      'StorageMaximumLevel'   = $Q.StorageMaximumLevel
-      'StorageWarningLevel'   = $Q.StorageWarningLevel
-      'InvitedUserMaximumLevel' = $Q.InvitedUserMaximumLevel
-      'UserCodeMaximumLevel'  = $Q.UserCodeMaximumLevel
-      'UserCodeWarningLevel'  = $Q.UserCodeWarningLevel
+      'TemplateName'          = $quotaTemplate.Name
+      'StorageMaximumLevel'   = $quotaTemplate.StorageMaximumLevel
+      'StorageWarningLevel'   = $quotaTemplate.StorageWarningLevel
+      'InvitedUserMaximumLevel' = $quotaTemplate.InvitedUserMaximumLevel
+      'UserCodeMaximumLevel'  = $quotaTemplate.UserCodeMaximumLevel
+      'UserCodeWarningLevel'  = $quotaTemplate.UserCodeWarningLevel
       #'WarningLevelEmail'     = $xxx
     }
     $output = New-Object -TypeName PSObject -Property $properties
