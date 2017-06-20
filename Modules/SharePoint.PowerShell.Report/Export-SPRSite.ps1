@@ -1,4 +1,4 @@
-﻿function Export-SPRSiteConfiguration {
+﻿function Export-SPRSite {
     param(
         [string]$Path
     )

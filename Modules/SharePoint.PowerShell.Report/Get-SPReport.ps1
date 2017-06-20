@@ -191,22 +191,24 @@
   -PreContent "<h2>$title</h2>" `
   -Properties SiteCollectionTitle, SiteCollectionUrl, Language, Template, NumberOfSites, UIVersion, Storage
 
-
-
-
-
-  
   # 7.2.3	QUOTA TEMPLATES
   $title = 'Quota Templates'
   Write-Host -Object "Building section: $title"
-  $report += Get-SPRQuotaTemplates -SPQuotaTemplate $SPRObjects.SPRQuotaTemplate |
+  $report += Get-SPRQuotaTemplates -SPQuotaTemplate $SPRObjects.SPQuotaTemplate |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties TemplateName,StorageMaximumLevel,StorageWarningLevel,InvitedUserMaximumLevel,UserCodeMaximumLevel,UserCodeWarningLevel
   
-  
   # 7.2.4	SITE COLLECTION QUOTAS
-  
+  $title = 'Site Collection Quotas'
+  Write-Host -Object "Building section: $title"
+  $report += Get-SPRSiteCollectionQuotas -SPSite $SPRObjects.SPSite -SPQuotaTemplate $SPRObjects.SPQuotaTemplate |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties SiteCollection,URL,QuotaName,LockStatus,StorageMaximumLevel,StorageWarningLevel,UsageStorage
+
+
+
   # 7.3.1.1	DISTRIBUTED CACHE CONFIG
   $title = 'DISTRIBUTED CACHE CONFIG'    
   Write-Host -Object "Building section: $title"                             
