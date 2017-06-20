@@ -174,10 +174,17 @@
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties DisplayName, SuperUserAcount, SuperUserHasFullControl, SuperReaderAcount, SuperReaderHasFullRead
-
-
-  # 7.2.1	SITE COLLECTIONS LIST
   
+  # 7.2.1	SITE COLLECTIONS LIST
+  $title = 'Site Collections List'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSiteCollectionList -SPSite $SPRObjects.SPSite |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties WebApplication, SiteCollectionTitle, SiteCollectionUrl, SiteCollectionContentDatabase, Owners
+
+
+
   # 7.2.2	USAGE AND PROPERTIES
   
   # 7.2.3	QUOTA TEMPLATES

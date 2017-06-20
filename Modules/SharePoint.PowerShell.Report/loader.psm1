@@ -23,7 +23,7 @@
 . $PSScriptRoot\Export-SPRObjects.ps1
 . $PSScriptRoot\Export-SPRServerConfiguration.ps1
 . $PSScriptRoot\Export-SPRServiceInstanceConfiguration.ps1
-. $PSScriptRoot\Export-SPRSiteConfiguration.ps1
+. $PSScriptRoot\Export-SPRSite.ps1
 . $PSScriptRoot\Export-SPRWebApplicationConfiguration.ps1
 . $PSScriptRoot\Get-SPRAppUrls.ps1
 . $PSScriptRoot\Get-SPRAudiences.ps1

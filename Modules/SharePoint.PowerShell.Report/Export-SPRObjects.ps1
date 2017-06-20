@@ -20,7 +20,7 @@ function Export-SPRObjects
   Export-SPRDatabaseConfiguration -Path $Path
   Export-SPRServerConfiguration -Path $Path
   Export-SPRWebApplicationConfiguration -Path $Path
-  Export-SPRSiteConfiguration -Path $Path
+  Export-SPRSite -Path $Path
   Export-SPRServiceInstanceConfiguration -Path $Path
   Export-SPREnterpriseSearchServiceApplicationConfiguration -Path $Path
   Export-SPREnterpriseSearchTopologyConfiguration -Path $Path
