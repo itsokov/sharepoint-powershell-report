@@ -241,6 +241,7 @@
   
   # 7.3.2.4	CRAWL STORES
   
+  
   # 7.3.2.5	FILE TYPES
 
   # 7.3.2.6	AUTHORITATIVE PAGES
@@ -252,6 +253,12 @@
   # 7.3.2.9	MANAGED PROPERTIES
   
   # 7.3.2.10	SEARCH TOPOLOGIES
+  $title = 'Search Topologies'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchTopologies -SPREnterpriseSearchTopologyConfiguration $SPRObjects.SPREnterpriseSearchTopologyConfiguration |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, Topology, CreationDate, State, ComponentCount, IsActive
   
   # 7.3.2.11	SEARCH COMPONENTS
   
