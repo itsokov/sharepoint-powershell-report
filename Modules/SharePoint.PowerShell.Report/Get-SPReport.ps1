@@ -197,7 +197,7 @@
   $report += Get-SPRQuotaTemplates -SPQuotaTemplate $SPRObjects.SPQuotaTemplate |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
-  -Properties TemplateName,StorageMaximumLevel,StorageWarningLevel,InvitedUserMaximumLevel,UserCodeMaximumLevel,UserCodeWarningLevel
+  -Properties TemplateName, StorageMaximumLevel, StorageWarningLevel, InvitedUserMaximumLevel, UserCodeMaximumLevel, UserCodeWarningLevel
   
   # 7.2.4	SITE COLLECTION QUOTAS
   $title = 'Site Collection Quotas'
@@ -205,10 +205,8 @@
   $report += Get-SPRSiteCollectionQuotas -SPSite $SPRObjects.SPSite -SPQuotaTemplate $SPRObjects.SPQuotaTemplate |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
-  -Properties SiteCollection,URL,QuotaName,LockStatus,StorageMaximumLevel,StorageWarningLevel,UsageStorage
-
-
-
+  -Properties SiteCollection, URL, QuotaName, LockStatus, StorageMaximumLevel, StorageWarningLevel, UsageStorage
+  
   # 7.3.1.1	DISTRIBUTED CACHE CONFIG
   $title = 'DISTRIBUTED CACHE CONFIG'    
   Write-Host -Object "Building section: $title"                             
@@ -218,6 +216,12 @@
   -Properties Host, Size, CachePort, ClusterPort, ReplicationPort, ArbitrationPort, Status
 
   # 7.3.2.1	SEARCH SETTINGS
+  $title = 'Search Settings'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchSettings -SPSearchServiceApplication $SPRObjects.SPSearchServiceApplication -SPEnterpriseSearchServiceInstance $SPRObjects.SPEnterpriseSearchServiceInstance |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, DefaultContentAccessAccount, ContactEmailAddress, IndexLocation, SearchAlertsStatus, QueryLogging
   
   # 7.3.2.2	CONTENT SOURCES
   
@@ -453,41 +457,33 @@
 
   <#
 
-  $title = 'SearchTopologies'
-  Write-Host -Object "Building section: $title"
-  $report += Get-SPRSearchTopologies -Topologies $SPRObjects.ActiveSearchTopology |
-  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-  -PreContent "<h2>$title</h2>" `
-  -Properties ServiceApplication, Topology, CreationDate, State, ComponentCount, IsActive
+      $title = 'SearchTopologies'
+      Write-Host -Object "Building section: $title"
+      $report += Get-SPRSearchTopologies -Topologies $SPRObjects.ActiveSearchTopology |
+      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+      -PreContent "<h2>$title</h2>" `
+      -Properties ServiceApplication, Topology, CreationDate, State, ComponentCount, IsActive
 
+      $title = 'SearchTopologies'
+      Write-Host -Object "Building section: $title"
+      $report += Get-SPRSearchTopologies -Topologies $SPRObjects.ActiveSearchTopology |
+      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+      -PreContent "<h2>$title</h2>" `
+      -Properties ServiceApplication,Topology,CreationDate,State,ComponentCount,IsActive
 
-  $title = 'QuotaTemplate'
-  Write-Host -Object "Building section: $title"
-  $report += Get-SPRQuotaTemplates -Quotas $SPRObjects.SPRQuota |
-  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-  -PreContent "<h2>$title</h2>" `
-  -Properties TemplateName,StorageMaximumLevel,StorageWarningLevel,InvitedUserMaximumLevel,UserCodeMaximumLevel,UserCodeWarningLevel
+      $title = 'SearchComponent'
+      Write-Host -Object "Building section: $title"
+      $report += Get-SPRSearchComponents -SearchComponents $SPRObjects.SearchComponent |
+      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+      -PreContent "<h2>$title</h2>" `
+      -Properties Name,Server,ServiceApplication,Topology,IsActive
 
-  $title = 'SearchTopologies'
-  Write-Host -Object "Building section: $title"
-  $report += Get-SPRSearchTopologies -Topologies $SPRObjects.ActiveSearchTopology |
-  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-  -PreContent "<h2>$title</h2>" `
-  -Properties ServiceApplication,Topology,CreationDate,State,ComponentCount,IsActive
-
-  $title = 'SearchComponent'
-  Write-Host -Object "Building section: $title"
-  $report += Get-SPRSearchComponents -SearchComponents $SPRObjects.SearchComponent |
-  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-  -PreContent "<h2>$title</h2>" `
-  -Properties Name,Server,ServiceApplication,Topology,IsActive
-
-  $title = 'SearchIndex'
-  Write-Host -Object "Building section: $title"
-  $report += Get-SPRSearchIndexPartitions -IndexPartitions $SPRObjects.SearchServiceApplication |
-  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-  -PreContent "<h2>$title</h2>" `
-  -Properties Name,Server,ServiceApplication,Topology,RootDirectory,IndexLocation,Role,Service,Status
+      $title = 'SearchIndex'
+      Write-Host -Object "Building section: $title"
+      $report += Get-SPRSearchIndexPartitions -IndexPartitions $SPRObjects.SearchServiceApplication |
+      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+      -PreContent "<h2>$title</h2>" `
+      -Properties Name,Server,ServiceApplication,Topology,RootDirectory,IndexLocation,Role,Service,Status
   #>
   #endregion
                  
