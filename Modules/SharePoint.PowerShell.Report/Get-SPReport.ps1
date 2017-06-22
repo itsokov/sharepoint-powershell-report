@@ -232,6 +232,12 @@
   -Properties ServiceApplication, ContentSourceName, ContentSourceType
   
   # 7.3.2.3	START ADDRESSES
+  $title = 'Start Addresses'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchContentSourcesStartAddresses -SPEnterpriseSearchServiceApplication $SPRObjects.SPSearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, ContentSourceName, ContentSourceStartAddress
   
   # 7.3.2.4	CRAWL STORES
   
