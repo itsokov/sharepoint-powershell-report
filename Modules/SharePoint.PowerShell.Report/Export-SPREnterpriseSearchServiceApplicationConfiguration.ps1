@@ -3,7 +3,7 @@
         [string]$Path
     )
 
-    $file = '{0}\SPSearchServiceApplication.xml' -f $Path
+    $file = '{0}\SPEnterpriseSearchServiceApplication.xml' -f $Path
     Start-Job -ScriptBlock {
         
         Add-PSSnapin -Name Microsoft.SharePoint.PowerShell
