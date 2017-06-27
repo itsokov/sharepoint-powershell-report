@@ -218,7 +218,7 @@
   # 7.3.2.1	SEARCH SETTINGS
   $title = 'Search Settings'    
   Write-Host -Object "Building section: $title"                             
-  $report += Get-SPRSearchSettings -SPSearchServiceApplication $SPRObjects.SPSearchServiceApplication -SPEnterpriseSearchServiceInstance $SPRObjects.SPEnterpriseSearchServiceInstance |
+  $report += Get-SPRSearchSettings -SPEnterpriseSearchServiceApplication $SPRObjects.SPEnterpriseSearchServiceApplication -SPEnterpriseSearchServiceInstance $SPRObjects.SPEnterpriseSearchServiceInstance |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties ServiceApplication, DefaultContentAccessAccount, ContactEmailAddress, IndexLocation, SearchAlertsStatus, QueryLogging
@@ -532,3 +532,4 @@
 }
 
 
+ 
