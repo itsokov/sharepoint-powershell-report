@@ -42,6 +42,7 @@ function Export-SPRObjects
   Export-SPRUserProfileManager -Path $Path
   Export-SPRUserProfileServiceApplication -Path $Path
   Export-SPRQuotaTemplates -Path $Path
+  Export-SPREnterpriseSearchServiceApplicationInstance -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
   $null = Get-Job | 
