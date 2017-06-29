@@ -273,14 +273,20 @@
   -Properties ServiceApplication, Multilingual, ReadPermissionLevel, SenderEmailAddress, EnableNetbiosdomainName, MySiteManagedPath
 
   # 7.3.3.2	AUDIENCES
-    $title = 'Audiences'    
+  $title = 'Audiences'    
   Write-Host -Object "Building section: $title"                             
-  $report += Get-SPRMySiteSettings -SPServiceApplicationUserProfiles $SPRObjects.SPServiceApplicationUserProfiles |
+  $report += Get-SPRMySiteSettings -SPServiceApplicationUserProfiles $SPRObjects.SPServiceApplicationUserProfiles -SPUserProfileManager $SPRObjects.SPUserProfileManager |
   ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
   -PreContent "<h2>$title</h2>" `
   -Properties *
   
   # 7.3.3.3	USER PROFILE PROPERTIES
+  $title = 'User Profile Properties'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRUserProfuleProperties -SPUserProfileManager $SPRObjects.SPUserProfileManager |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties DisplayName, PropertyType, DefaultPolicy, PrivacyPolicy, UserOverridePolicy, Replicable, Multivalue, Alias
   
   # 7.3.3.4	USER PROFILES COUNT
   
