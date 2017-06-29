@@ -273,6 +273,12 @@
   -Properties ServiceApplication, Multilingual, ReadPermissionLevel, SenderEmailAddress, EnableNetbiosdomainName, MySiteManagedPath
 
   # 7.3.3.2	AUDIENCES
+    $title = 'Audiences'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRMySiteSettings -SPServiceApplicationUserProfiles $SPRObjects.SPServiceApplicationUserProfiles |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties *
   
   # 7.3.3.3	USER PROFILE PROPERTIES
   
