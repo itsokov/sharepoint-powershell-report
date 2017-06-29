@@ -3,21 +3,25 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPServiceApplicationUserProfiles
   )
 	
-  foreach ($XXX in $XXXs)
+  $output = @()
+  foreach ($userProfileServiceApplication in $SPServiceApplicationUserProfiles)
   {
-    $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'Name'             = $XXX
-      'Owner'            = $XXX
-      'SatisfyAllRules'  = $XXX
-      'LastCompiled'     = $XXX
-      'Members'          = $XXX
+    foreach ($audience in $userProfileServiceApplication.AudienceManager.Audiences)
+    {
+      $properties = [ordered]@{
+        'ServiceApplication' = $userProfileServiceApplication.Name
+        'Name'             = $audience.AudienceName
+        'Owner'            = $audience.OwnerAccountName
+        'SatisfyAllRules'  = $audience.AudienceRules
+        'LastCompiled'     = $audience.LastCompilation
+        'Members'          = $audience.MemberShipCount
+      }
+      $entry = New-Object -TypeName PSObject -Property $properties
+      $output += $entry
     }
-    $output = New-Object -TypeName PSObject -Property $properties
-		
     Write-Output -InputObject $output
   }
 }
