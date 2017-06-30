@@ -289,6 +289,12 @@
   -Properties DisplayName, PropertyType, DefaultPolicy, PrivacyPolicy, UserOverridePolicy, Replicable, Multivalue, Alias
   
   # 7.3.3.4	USER PROFILES COUNT
+  $title = 'User Profile Count'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRUserProfuleCount -SPServiceApplicationUserProfiles $SPRObjects.SPServiceApplicationUserProfiles -SPUserProfileManager $SPRObjects.SPUserProfileManager |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, UserProfileCount
   
   # 7.3.4	SERVICE APPLICATIONS LIST
   
