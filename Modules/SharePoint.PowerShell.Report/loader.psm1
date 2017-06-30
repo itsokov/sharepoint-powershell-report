@@ -145,4 +145,5 @@
 . $PSScriptRoot\Export-SPRUserProfileServiceApplication
 . $PSScriptRoot\Get-SPRSearchTopologies
 . $PSScriptRoot\Export-SPRQuotaTemplates.ps1
-. $PSScriptRoot\Export-SPREnterpriseSearchServiceApplicationInstance
+. $PSScriptRoot\Export-SPREnterpriseSearchServiceApplicationInstance.ps1
+. $PSScriptRoot\Export-SPRServiceApplicationConfiguration.ps1
