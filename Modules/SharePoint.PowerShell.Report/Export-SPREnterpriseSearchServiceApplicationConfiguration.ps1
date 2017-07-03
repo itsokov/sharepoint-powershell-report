@@ -24,6 +24,10 @@
           $searchFileExtension = Get-SPEnterpriseSearchCrawlExtension -SearchApplication $searchServiceApplication
           $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'CrawlFileExtensions' -Value $searchFileExtension
 
+          $searchOwner = Get-SPEnterpriseSearchOwner -Level Ssa
+          $searchQueryAuthority = Get-SPEnterpriseSearchQueryAuthority -SearchApplication $searchServiceApplication -Owner $searchOwner
+          $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'SearchQueryAuthority' -Value $searchQueryAuthority
+
           $object += $searchServiceApplication
         }
 
