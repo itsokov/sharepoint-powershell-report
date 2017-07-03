@@ -240,9 +240,20 @@
   -Properties ServiceApplication, ContentSourceName, ContentSourceStartAddress
   
   # 7.3.2.4	CRAWL STORES
-  
+  $title = 'Crawl Stores'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchCrawlStores -SPEnterpriseSearchServiceApplication $SPRObjects.SPEnterpriseSearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, Name, SQLServer
   
   # 7.3.2.5	FILE TYPES
+  $title = 'File Types'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchFileTypes -SPEnterpriseSearchServiceApplication $SPRObjects.SPEnterpriseSearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, FileTypes
 
   # 7.3.2.6	AUTHORITATIVE PAGES
   

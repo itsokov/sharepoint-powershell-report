@@ -3,15 +3,15 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPEnterpriseSearchServiceApplication
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($searchServiceApplication in $SPEnterpriseSearchServiceApplication)
   {
     $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'Name'             = $XXX
-      'SQLServer'        = $XXX
+      'ServiceApplication' = $searchServiceApplication.Name
+      'Name'             = $searchServiceApplication.SearchCrawlDatabase.Name
+      'SQLServer'        = $searchServiceApplication.Database.Server.Name
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

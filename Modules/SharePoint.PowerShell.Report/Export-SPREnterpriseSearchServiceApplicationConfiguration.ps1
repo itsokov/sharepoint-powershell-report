@@ -13,9 +13,16 @@
         foreach ($searchServiceApplication in $searchServiceApplications)
         {
           $content = New-Object -TypeName Microsoft.Office.Server.Search.Administration.Content -ArgumentList $searchServiceApplication
-          $crawlContentSource = Get-SPEnterpriseSearchCrawlContentSource -SearchApplication $searchServiceApplication
           $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'Content' -Value $content
+
+          $crawlContentSource = Get-SPEnterpriseSearchCrawlContentSource -SearchApplication $searchServiceApplication
           $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'CrawlContentSources' -Value $crawlContentSource
+
+          $searchCrawlDatabase = Get-SPEnterpriseSearchCrawlDatabase -SearchApplication $searchServiceApplication
+          $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'SearchCrawlDatabase' -Value $searchCrawlDatabase
+
+          $searchFileExtension = Get-SPEnterpriseSearchCrawlExtension -SearchApplication $searchServiceApplication
+          $searchServiceApplication | Add-Member -MemberType NoteProperty -Name 'CrawlFileExtensions' -Value $searchFileExtension
 
           $object += $searchServiceApplication
         }
