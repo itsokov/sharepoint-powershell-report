@@ -256,6 +256,12 @@
   -Properties ServiceApplication, FileTypes
 
   # 7.3.2.6	AUTHORITATIVE PAGES
+  $title = 'Authoritative Pages'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchAuthoritativePages -SPEnterpriseSearchServiceApplication $SPRObjects.SPEnterpriseSearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, Url, Level, Status
   
   # 7.3.2.7	FEDERATED LOCATIONS
   
