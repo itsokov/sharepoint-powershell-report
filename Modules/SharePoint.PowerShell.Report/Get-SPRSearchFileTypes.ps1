@@ -3,14 +3,15 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPEnterpriseSearchServiceApplication
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($searchServiceApplication in $SPEnterpriseSearchServiceApplication)
   {
+    $filetypes = $searchServiceApplication.CrawlFileTypes.FileExtension -join (',')
     $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'FileTypes'        = $XXX
+      'ServiceApplication' = $searchServiceApplication.Name
+      'FileTypes'        = $filetypes
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		
