@@ -264,6 +264,12 @@
   -Properties ServiceApplication, Url, Level, Status
   
   # 7.3.2.7	FEDERATED LOCATIONS
+  $title = 'Federated Locations'    
+  Write-Host -Object "Building section: $title"                             
+  $report += Get-SPRSearchFederatedLocations -SPEnterpriseSearchServiceApplication $SPRObjects.SPEnterpriseSearchServiceApplication |
+  ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
+  -PreContent "<h2>$title</h2>" `
+  -Properties ServiceApplication, DisplayName, Author, Version, LocationType, Trigger, CreationDate
   
   # 7.3.2.8	SCOPES
   

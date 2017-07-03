@@ -31,7 +31,7 @@
           $object += $searchServiceApplication
         }
 
-        $object | Export-Clixml -Path $args[0] -Depth 1
+        $object | Export-Clixml -Path $args[0] -Depth 3
     } -ArgumentList $file
 
 }
