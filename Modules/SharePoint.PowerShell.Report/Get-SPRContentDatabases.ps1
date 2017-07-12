@@ -3,10 +3,10 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$SPDatabase
+    [object[]]$SPRDatabase
   )
 	
-  $contentDatabases = $spdatabase | Where-Object -FilterScript {
+  $contentDatabases = $SPRDatabase | Where-Object -FilterScript {
     $_.Type -eq 'Content Database'
   }
 	

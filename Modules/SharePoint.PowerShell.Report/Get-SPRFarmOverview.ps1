@@ -3,25 +3,25 @@
   param
   (
     [Parameter(Mandatory)]
-    [object]$spfarm,
+    [object]$SPRFarm,
     [Parameter(Mandatory)]
-    [object[]]$SPDatabases
+    [object[]]$SPRDatabases
   )
 	
   $date = Get-Date
-  $configurationDatabase = $SPDatabases | Where-Object -FilterScript {
+  $configurationDatabase = $SPRDatabases | Where-Object -FilterScript {
     $_.Type -eq 'Configuration Database'
   }
-  $patchLevel = Get-SPRSharePointBuild -BuildVersion $spfarm.BuildVersion
-  $license = Get-SPRSharePointLicense -Products $spfarm.Products
+  $patchLevel = Get-SPRSharePointBuild -BuildVersion $SPRFarm.BuildVersion
+  $license = Get-SPRSharePointLicense -Products $SPRFarm.Products
 	
   $properties = [ordered]@{
-    'FarmName'            = $spfarm.Name
-    'BuildVersion'        = $spfarm.BuildVersion.ToString()
+    'FarmName'            = $SPRFarm.Name
+    'BuildVersion'        = $SPRFarm.BuildVersion.ToString()
     'PatchLevel'          = $patchLevel
     'SharePointLicense'   = $license
     'ConfigurationDatabase' = $configurationDatabase.Name
-    'FarmServerCount'     = $spfarm.Servers.Count
+    'FarmServerCount'     = $SPRFarm.Servers.Count
     'ReportCreatedOn'     = $date.ToString()
   }
 	

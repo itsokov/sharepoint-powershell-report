@@ -1,15 +1,28 @@
-﻿function Export-SPRSite {
-    param(
-        [string]$Path
-    )
+﻿function Export-SPRSite
+{
+  param(
+    [string]$Path,
+    [bool]$Async
+  )
 
-    $file = '{0}\SPSite.xml' -f $Path
-    Start-Job -ScriptBlock {
-        
-        Add-PSSnapin -Name Microsoft.SharePoint.PowerShell
+  $file = '{0}\SPRSite.xml' -f $Path
+    
+  $scriptblock = {
+    param($Path = $file)
+    Add-PSSnapin -Name Microsoft.SharePoint.PowerShell -ErrorAction SilentlyContinue
+    Write-Host -Object 'Exporting: Site Collection Configuration. ' -NoNewline
 
-        $object = Get-SPSite
-        $object | Export-Clixml -Path $args[0]
-    } -ArgumentList $file
+    $output = Get-SPSite
+    $output | Export-Clixml -Path $Path
 
+    Write-Host -Object ' Done.'
+  }
+  if($Async) 
+  {
+    Export-SPRObject -ScriptBlock $scriptblock -File $file -Async
+  }
+  else 
+  {
+    Export-SPRObject -ScriptBlock $scriptblock -File $file
+  }
 }

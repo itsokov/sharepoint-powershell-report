@@ -5,12 +5,12 @@
   )
 
   [System.Reflection.Assembly]::LoadWithPartialName('Microsoft.SharePoint')
-  $output = [Microsoft.SharePoint.SPregionalSettings]::GlobalTimeZones | Where-Object -FilterScript {
-    $_.ID -eq $Id
-  } | Select-Object -ExpandProperty Description
-  if($output -eq $null)
+  $description = [Microsoft.SharePoint.SPregionalSettings]::GlobalTimeZones | Where-Object -FilterScript {$_.ID -eq $Id} | Select-Object -ExpandProperty Description
+  if($description -eq $null)
   {
-    $output = '(none)'
+    [string]$output = '(none)'
+  } else {
+    [string]$output = $description
   }
 
   Write-Output -InputObject $output

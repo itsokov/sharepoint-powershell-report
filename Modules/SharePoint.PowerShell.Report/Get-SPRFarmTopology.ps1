@@ -3,12 +3,10 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$spserver,
-    [Parameter(Mandatory = $true)]
-    [object[]]$spserviceinstance
+    [object[]]$SPRServer
   )
 	
-  foreach ($server in $spserver)
+  foreach ($server in $SPRServer)
   {
     $computerName = Get-SPRComputerName -Address $server.Address
     $ipAddress = Get-CimInstance -ClassName Win32_NetworkAdapterConfiguration -ComputerName $computerName |
@@ -16,8 +14,8 @@
       $_.IPAddress -ne $null
     } |
     Select-Object -ExpandProperty IPAddress
-    $centralAdminServiceInstance = $spserviceinstance | Where-Object -FilterScript {
-      $_.TypeName -eq 'Central Administration' -and (($_.Server|Select-Object -ExpandProperty Name) -eq $server.Address)
+    $centralAdminServiceInstance = $server.ServiceInstances | Where-Object -FilterScript {
+      $_.TypeName -eq 'Central Administration' -and ($_.Server.Name -eq $server.Address)
     }
     if ($centralAdminServiceInstance -ne $null)
     {

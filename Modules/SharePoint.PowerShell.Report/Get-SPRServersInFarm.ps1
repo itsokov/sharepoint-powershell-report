@@ -3,10 +3,10 @@
   param
   (
     [parameter(Mandatory = $true)]
-    [object[]]$spserver
+    [object[]]$SPRServer
   )
 	
-  foreach ($server in $spserver)
+  foreach ($server in $SPRServer)
   {
     $computerName = Get-SPRComputerName -Address $server.Address
 		

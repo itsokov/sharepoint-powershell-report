@@ -3,10 +3,10 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$SPWebApplication
+    [object[]]$SPRWebApplication
   )
 	
-  foreach ($webApplication in $SPWebApplication)
+  foreach ($webApplication in $SPRWebApplication)
   {
   
     $timeZone = Get-SPRTimeZoneById -Id $webApplication.DefaultTimeZone

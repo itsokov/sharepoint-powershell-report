@@ -1,22 +1,23 @@
-﻿function Export-SPRManagedAccount
+﻿function Export-SPRDatabase
 {
   param(
     [string]$Path,
     [bool]$Async
   )
 
-  $file = '{0}\SPRManagedAccount.xml' -f $Path
-  
+  $file = '{0}\SPRDatabase.xml' -f $Path
+
   $scriptblock = {
     param($Path = $file)
-    Add-PSSnapin -Name Microsoft.SharePoint.PowerShell
-    Write-Host -Object 'Exporting: Managed Account Configuration. ' -NoNewline
+    Add-PSSnapin -Name Microsoft.SharePoint.PowerShell -ErrorAction SilentlyContinue
+    Write-Host -Object 'Exporting: Database Configuration. ' -NoNewline
 
-    $output = Get-SPManagedAccount
+    $output = Get-SPDatabase
     $output | Export-Clixml -Path $Path
-      
+
     Write-Host -Object ' Done.'
   }
+
   if($Async) 
   {
     Export-SPRObject -ScriptBlock $scriptblock -File $file -Async

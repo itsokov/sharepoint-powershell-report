@@ -1,41 +1,49 @@
-﻿Clear-Host
-Get-Job | Stop-Job
-Get-Job | Remove-Job
-
-if ($PSScriptRoot -eq $null)
+﻿function Add-SPHModulePath
 {
-  $Location = $PSCommandPath
-}
-else
-{
-  $Location = $PSScriptRoot
-}
-
-##region GeneralSettings
-$moduleName = 'SharePoint.PowerShell.Report'
-$exportPath = '{0}\Export' -f $Location
-$reportFilePath = '{0}\Report\Report.html' -f $Location
-#endregion GeneralSettings
-
-if ($env:PSModulePath -notlike ('*{0}*' -f $PSScriptRoot))
-{
-  #  $env:PSModulePath += ';{0}\Modules' -f $PSScriptRoot
-  $env:PSModulePath += ';{0}' -f $PSScriptRoot
+  param
+  (
+    [String]$Path
+  )
+  
+  if ($env:PSModulePath -notlike ('*{0}*' -f $Path))
+  {
+    $env:PSModulePath += ';{0}\Modules' -f $Path
+  }
 }
 
-#region reload module
-
-#$moduleLocation = '{0}\Modules\{1}\{1}.psd1' -f $Location, $moduleName
-if (Get-Module -Name $moduleName)
+function Get-SPHScriptLocation
 {
-  Remove-Module -Name $moduleName
-  #Import-Module -Name $moduleName
+  if ($PSScriptRoot -eq $null)
+  {
+    $location = $PSCommandPath
+  }
+  else
+  {
+    $location = $PSScriptRoot
+  }
+  
+  Write-Output -InputObject $location
 }
-#endregion reload module
 
-#Export-SPRObjects -Path $exportPath
-Get-SPReport -ExportPath $exportPath -FromExportedFiles -ReportFilePath $reportFilePath
-#Invoke-Item $reportFilePath
+#requires -Version 2.0
+$scriptLocation = Get-SPHScriptLocation
+Add-SPHModulePath -Path $scriptLocation
+
+Remove-Module -Name 'SharePoint.PowerShell.Report' -ErrorAction SilentlyContinue
+Import-Module -Name 'SharePoint.PowerShell.Report'
+  
+Remove-Module -Name 'SharePoint.PowerShell.Helpers' -ErrorAction SilentlyContinue
+Import-Module -Name 'SharePoint.PowerShell.Helpers'
+
+$exportPath = '{0}\Export' -f $scriptLocation
+$reportPath = '{0}\Report\Report.html' -f $scriptLocation
+
+Export-SPRObjects -Path $exportPath -Async:$false
+Get-SPReport -ExportPath $exportPath -ReportPath $reportPath -FromExportedFiles 
+
+
+
+
 
 
 

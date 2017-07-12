@@ -3,11 +3,11 @@
   param
   (
     [parameter(Mandatory = $true)]
-    [object[]]$spsite
+    [object[]]$SPRSite
 		
   )
 	
-  foreach ($site in $spsite)
+  foreach ($site in $SPRSite)
   {
     $siteAdmins = $site.RootWeb.SiteAdministrators | ForEach-Object -Process {
       ConvertTo-SPRLoginName -Login $_
