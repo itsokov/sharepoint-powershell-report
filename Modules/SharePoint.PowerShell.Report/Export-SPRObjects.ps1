@@ -1,4 +1,4 @@
-﻿function Export-SPRObjects
+function Export-SPRObjects
 {
   [OutputType([void])]
   param
@@ -20,7 +20,7 @@
   Export-SPRDatabaseConfiguration -Path $Path
   Export-SPRServerConfiguration -Path $Path
   Export-SPRWebApplicationConfiguration -Path $Path
-  Export-SPRSiteConfiguration -Path $Path
+  Export-SPRSite -Path $Path
   Export-SPRServiceInstanceConfiguration -Path $Path
   Export-SPREnterpriseSearchServiceApplicationConfiguration -Path $Path
   Export-SPREnterpriseSearchTopologyConfiguration -Path $Path
@@ -39,6 +39,10 @@
   Export-SPRWebServices -Path $Path
   Export-SPRWebServicesAdministration -Path $Path
   Export-SPRScheduledTasks -Path $Path
+  Export-SPRUserProfileManager -Path $Path
+  Export-SPRUserProfileServiceApplication -Path $Path
+  Export-SPRQuotaTemplates -Path $Path
+  Export-SPREnterpriseSearchServiceApplicationInstance -Path $Path
     
   Write-Host -Object 'Waiting on exports to complete...' -NoNewline
   $null = Get-Job | 

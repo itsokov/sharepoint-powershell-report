@@ -3,18 +3,21 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPEnterpriseSearchServiceApplication,
+    [Parameter(Mandatory = $true)]
+    [object[]]$SPEnterpriseSearchServiceInstance
+    
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($searchServiceApplication in $SPEnterpriseSearchServiceApplication)
   {
     $properties = [ordered]@{
-      'ServiceApplication'        = $XXX
-      'DefaultContetnAccessAccount' = $XXX
+      'ServiceApplication'        = $searchServiceApplication.Name
+      'DefaultContentAccessAccount' = $searchServiceApplication.Content.DefaultGatheringAccount
       'ContactEmailAddress'       = $XXX
-      'IndexLocation'             = $XXX
-      'SearchAlertsStatus'        = $XXX
-      'QueryLogging'              = $XXX
+      'IndexLocation'             = $SPEnterpriseSearchServiceInstance.CrawlComponents.IndexLocation
+      'SearchAlertsStatus'        = $searchServiceApplication.AlertsEnabled
+      'QueryLogging'              = $searchServiceApplication.QueryLoggingEnabled
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

@@ -3,17 +3,23 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPEnterpriseSearchServiceApplication
   )
-	
-  foreach ($XXX in $XXXs)
+	$output = @()
+  foreach ($searchServiceApplication in $SPEnterpriseSearchServiceApplication)
   {
-    $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'Name'             = $XXX
-      'Type'             = $XXX
+    
+    foreach ($contentSource in $searchServiceApplication.CrawlContentSources) {
+            $properties = [ordered]@{
+              'ServiceApplication' = $searchServiceApplication.Name
+              'ContentSourceName'             = $contentSource.Name
+              'ContentSourceType'             = $contentSource.Type
+        }
+        $entry = New-Object -TypeName PSObject -Property $properties
+        $output += $entry
     }
-    $output = New-Object -TypeName PSObject -Property $properties
+
+    
 		
     Write-Output -InputObject $output
   }

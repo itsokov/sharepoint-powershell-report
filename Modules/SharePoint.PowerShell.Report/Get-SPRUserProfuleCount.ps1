@@ -3,14 +3,16 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPServiceApplicationUserProfiles,
+    [Parameter(Mandatory = $true)]
+    [object[]]$SPUserProfileManager
   )
 	
-  foreach ($XXX in $XXXs)
+  foreach ($userProfileServiceApplication in $SPServiceApplicationUserProfiles)
   {
     $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'UserProfileCount' = $XXX
+      'ServiceApplication' = $userProfileServiceApplication.Name
+      'UserProfileCount' = $SPUserProfileManager.Count
     }
     $output = New-Object -TypeName PSObject -Property $properties
 		

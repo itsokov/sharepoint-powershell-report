@@ -3,22 +3,28 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$XXX
+    [object[]]$SPEnterpriseSearchServiceApplication
   )
 	
-  foreach ($XXX in $XXXs)
+  $output = @()
+  foreach ($searchServiceApplication in $SPEnterpriseSearchServiceApplication)
   {
-    $properties = [ordered]@{
-      'ServiceApplication' = $XXX
-      'DisplayName'      = $XXX
-      'Author'           = $XXX
-      'Version'          = $XXX
-      'LocationType'     = $XXX
-      'Trigger'          = $XXX
-      'CreationDate'     = $XXX
+    foreach($locationConfiguration in $searchServiceApplication.LocationConfiguration){
+        
     }
-    $output = New-Object -TypeName PSObject -Property $properties
+
+    $properties = [ordered]@{
+      'ServiceApplication' = $searchServiceApplication.Name
+      'DisplayName'      = $locationConfiguration.Name
+      'Author'           = $locationConfiguration.Author
+      'Version'          = $locationConfiguration.Version
+      'LocationType'     = $locationConfiguration.Type
+      'Trigger'          = $locationConfiguration.Visualizations
+      'CreationDate'     = $locationConfiguration.CreationDate
+    }
+    $entry = New-Object -TypeName PSObject -Property $properties
 		
-    Write-Output -InputObject $output
+    $output += $entry
   }
+  Write-Output -InputObject $output
 }

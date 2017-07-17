@@ -35,7 +35,7 @@ if (Get-Module -Name $moduleName)
 
 #Export-SPRObjects -Path $exportPath
 Get-SPReport -ExportPath $exportPath -FromExportedFiles -ReportFilePath $reportFilePath
-Invoke-Item $reportFilePath
+#Invoke-Item $reportFilePath
 
 
 

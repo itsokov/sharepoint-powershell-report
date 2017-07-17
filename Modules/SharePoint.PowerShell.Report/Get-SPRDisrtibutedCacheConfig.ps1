@@ -1,4 +1,4 @@
-﻿function Get-SPRDisrtibutedCacheConfig
+﻿function Get-SPRDistributedCacheConfig
 {
   param
   (
