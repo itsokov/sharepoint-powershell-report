@@ -95,38 +95,40 @@
   $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
   #endregion 7.1.2 GENERAL SETTINGS
   
+  #region 7.1.3	RESOURCE THROTTLING
+  $title = 'Web Application Resource Throttling'  
+  $object = Get-SPRWebApplicationResourceThrottling -SPRWebApplication $SPRObjects.SPRWebApplication
+  $properties = 'DisplayName', 'MaxItemsPerThrottledOperation', 'AllowOMCodeOverrideThrottleSettings', 'MaxQueryLookupFields', 'UnthrottledPrivilegedOperationWindowEnabled', 'MaxUniquePermScopesPerList', 'IsBackwardsCompatible', 'Days'
+  
+  $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+  #endregion 7.1.3	RESOURCE THROTTLING
+  
+  #region 7.1.4	WORKFLOW SETTINGS
+  $title = 'Web Application Workflow Settings'  
+  $object = Get-SPRWebApplicationWorkflowSettings -SPRWebApplication $SPRObjects.SPRWebApplication
+  $properties = 'DisplayName', 'AllowInternalUsers', 'AllowExternalUsers'
+  
+  $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+  #endregion 7.1.4	WORKFLOW SETTINGS
 
-  <#  # 7.1.2	GENERAL SETTINGS
-      $title = 'Web Application General Settings'    
-      Write-Host -Object "Building section: $title"                             
-      $report += Get-SPRWebApplicationGeneralSettings -SPWebApplication $SPRObjects.SPWebApplication |
-      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-      -PreContent "<h2>$title</h2>" `
-  -Properties DisplayName, DefaultTimeZone, DefaultQuotaTemplate#>
+  #region 7.1.5	WEB APPLICATION FEATURES 
+  $title = 'Web Application Features'  
+  $object = Get-SPRWebApplicationFeatures -SPRFeature $SPRObjects.SPRFeature -SPRwebApplication $SPRObjects.SPRWebApplication
+  $properties = 'WebApplication', 'FeatureName', 'CompatibilityLevel', 'IsActive'
+  
+  $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+  #endregion 7.1.5	WEB APPLICATION FEATURES 
+  
+  #region 7.1.6	MANAGED PATHS
+  $title = 'Web Application Managed Paths'  
+  $object = Get-SPRWebApplicationManagedPaths -SPRwebApplication $SPRObjects.SPRWebApplication
+  $properties = 'WebApplicationUrl', 'Name', 'PrefixType'
+  
+  $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+  #endregion 7.1.6	MANAGED PATHS
+  
 
-  <#  7.1.3	RESOURCE THROTTLING   
-      $title = 'Web Application Resource Throttling'    
-      Write-Host -Object "Building section: $title"                             
-      $report += Get-SPRWebApplicationResourceThrottling -SPWebApplication $SPRObjects.SPWebApplication |
-      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-      -PreContent "<h2>$title</h2>" `
-      -Properties DisplayName, MaxItemsPerThrottledOperation, AllowOMCodeOverrideThrottleSettings, MaxQueryLookupFields, UnthrottledPrivilegedOperationWindowEnabled, MaxUniquePermScopesPerList, IsBackwardsCompatible, Days
-
-      7.1.4	WORKFLOW SETTINGS
-      $title = 'Web Application Workflow Settings'    
-      Write-Host -Object "Building section: $title"                             
-      $report += Get-SPRWebApplicationWorkflowSettings -SPWebApplication $SPRObjects.SPWebApplication |
-      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-      -PreContent "<h2>$title</h2>" `
-      -Properties DisplayName, AllowInternalUsers, AllowExternalUsers
-      
-      7.1.5	WEB APPLICATION FEATURES                
-      $title = 'Web Application Features'    
-      Write-Host -Object "Building section: $title"                             
-      $report += Get-SPRWebApplicationFeatures -SPFeature $SPRObjects.SPFeature -SPwebApplication $SPRObjects.SPWebApplication |
-      ConvertTo-EnhancedHTMLFragment -As Table -EvenRowCssClass 'even' -OddRowCssClass 'odd' -TableCssClass 'report-table' `
-      -PreContent "<h2>$title</h2>" `
-      -Properties WebApplication, FeatureName, CompatibilityLevel, IsActive
+  <#
       
       7.1.6	MANAGED PATHS
       $title = 'Web Application Managed Paths'    

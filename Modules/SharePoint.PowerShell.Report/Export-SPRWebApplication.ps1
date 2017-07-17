@@ -30,8 +30,8 @@
       } ) | Select-Object -First 1 -ExpandProperty PolicyRoleBindings ).Name -eq 'Full Read' 
       $webApplication | Add-Member -MemberType NoteProperty -Name 'SuperReaderHasFullRead' -Value $superReaderHasFullRead -Force
       
-      $managedPath = Get-SPManagedPath -WebApplication $webApplication
-      $webApplication | Add-Member -MemberType NoteProperty 'ManagedPath' -Value $managedPath
+      $managedPaths = Get-SPManagedPath -WebApplication $webApplication
+      $webApplication | Add-Member -MemberType NoteProperty 'ManagedPaths' -Value $managedPaths
       
       $output += $webApplication
     }

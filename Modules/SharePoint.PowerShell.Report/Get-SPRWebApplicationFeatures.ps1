@@ -3,23 +3,22 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$SPFeature,
+    [object[]]$SPRFeature,
     [Parameter(Mandatory = $true)]
-    [object[]]$SPwebApplication
+    [object[]]$SPRwebApplication
   )
 	
-  $features = $SPFeature | Where-Object { $_.Scope.Value -eq 'WebApplication' }
+  $features = $SPRFeature | Where-Object { $_.Scope.Value -eq 'WebApplication' }
   
-  foreach ($webApplication in $SPwebApplication)
+  foreach ($webApplication in $SPRwebApplication)
   {
     foreach ($feature in $features)
     {
-      $title = $feature.Name
       $isActive = ($webApplication.Features | Where-Object {$_.DefinitionId -eq $feature.Id}) -ne $null
       
       $properties = @{
         'WebApplication'      = $webApplication.DisplayName
-        'FeatureName'      = $feature.DisplayNameEN
+        'FeatureName'      = $feature.Title
         'CompatibilityLevel' = $feature.CompatibilityLevel
         'IsActive'         = $isActive
       }

@@ -3,12 +3,16 @@
   param
   (
     [Parameter(Mandatory = $true)]
-    [object[]]$SPManagedPath
+    [object[]]$SPRWebApplication
   )
 	
-  foreach ($managedPath in $SPManagedPath)
+  foreach ($webApplication in $SPRWebApplication)
   {
-if($managedPath.Name -eq '')
+    $managedPaths = $webApplication.ManagedPaths
+    
+    foreach ($managedPath in $ManagedPaths)
+    {
+      if($managedPath.Name -eq '')
       {
         $name = '/'
       }
@@ -26,15 +30,15 @@ if($managedPath.Name -eq '')
         $prefixType = 'Wildcard Inclusion'
       }
       
-    
       $properties = @{
-        'WebApplicationUrl' = $managedPath.WebApplicationUrl
+        'WebApplicationUrl' = $webApplication.Url
         'Name'      = $name
         'PrefixType' = $prefixType
       }
 
-    $output = New-Object -TypeName PSObject -Property $properties
+      $output = New-Object -TypeName PSObject -Property $properties
 		
-    Write-Output -InputObject $output
+      Write-Output -InputObject $output
+    }
   }
 }
