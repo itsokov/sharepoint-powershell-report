@@ -20,7 +20,7 @@
 . $PSScriptRoot\Export-SPRFeature.ps1
 
 # helper commands
-. $PSScriptRoot\Get-SPReport.ps1
+. $PSScriptRoot\Get-SPReport_tsokov.ps1
 . $PSScriptRoot\Get-SPReportFragment.ps1
 . $PSScriptRoot\Get-SPRObject.ps1
 . $PSScriptRoot\Get-SPRSharePointBuild.ps1
@@ -47,6 +47,7 @@
 . $PSScriptRoot\Get-SPRWebApplicationWorkflowSettings.ps1
 . $PSScriptRoot\Get-SPRWebApplicationFeatures.ps1
 . $PSScriptRoot\Get-SPRWebApplicationManagedPaths.ps1
+. $PSScriptRoot\Get-SPRSearchManagedProperties.ps1
 
 <#
     #$PSScriptRoot\Export-SPRServiceInstance.ps1
@@ -115,7 +116,7 @@
     . $PSScriptRoot\Get-SPRSearchFederatedLocations.ps1
     . $PSScriptRoot\Get-SPRSearchFileTypes.ps1
     . $PSScriptRoot\Get-SPRSearchIndexPartitions.ps1
-    . $PSScriptRoot\Get-SPRSearchManagedProperties.ps1
+    
     . $PSScriptRoot\Get-SPRSearchScopes.ps1
 
     . $PSScriptRoot\Get-SPRSearchSettings.ps1
