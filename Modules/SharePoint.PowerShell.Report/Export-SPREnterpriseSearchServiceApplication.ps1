@@ -49,6 +49,11 @@
       $managedProperties = Get-SPEnterpriseSearchMetadataManagedProperty -SearchApplication $searchServiceApplication
 	  $mySearchServiceApplication | Add-Member -MemberType NoteProperty -Name "ManagedProperties" -value $managedProperties
 
+      $activeTopology = Get-SPEnterpriseSearchTopology -SearchApplication $searchServiceApplication -Active
+      $searchComponents=Get-SPEnterpriseSearchComponent -SearchTopology $activeTopology
+
+      $mySearchServiceApplication | Add-Member -MemberType NoteProperty -Name "Components" -value $searchComponents
+
       $output += $mySearchServiceApplication
     }
 

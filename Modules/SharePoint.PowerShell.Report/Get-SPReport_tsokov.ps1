@@ -14,15 +14,6 @@
   }
   $SPRObjects = Get-SPRObject -Path $ExportPath
 	
-
-  
-  #region 7.1.6	MANAGED PATHS
-  $title = 'Web Application Managed Paths'  
-  $object = Get-SPRWebApplicationManagedPaths -SPRwebApplication $SPRObjects.SPRWebApplication
-  $properties = 'WebApplicationUrl', 'Name', 'PrefixType'
-  
-  $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
-  #endregion 7.1.6	MANAGED PATHS
   
 
   #region 7.3.2.9	MANAGED PROPERTIES
@@ -34,6 +25,16 @@
   #endregion 7.3.2.9	MANAGED PROPERTIES
 
 
+
+  #region 7.3.2.11	SEARCH COMPONENTS
+
+   $title = 'Search Components'  
+   $object = Get-SPRSearchComponents -SPREnterpriseSearchServiceApplications $SPRObjects.SPREnterpriseSearchServiceApplication
+   $properties = 'ServiceApplication', 'ServiceApplicationID','ActiveTopology','Name','Server'
+   $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+
+
+  #endregion 7.3.2.11	SEARCH COMPONENTS
 
   <#
       
@@ -201,7 +202,6 @@
       -PreContent "<h2>$title</h2>" `
       -Properties ServiceApplication, Topology, CreationDate, State, ComponentCount, IsActive
   
-      7.3.2.11	SEARCH COMPONENTS
   
       7.3.2.12	INDEX PARTITIONS
   

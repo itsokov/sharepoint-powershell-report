@@ -48,6 +48,7 @@
 . $PSScriptRoot\Get-SPRWebApplicationFeatures.ps1
 . $PSScriptRoot\Get-SPRWebApplicationManagedPaths.ps1
 . $PSScriptRoot\Get-SPRSearchManagedProperties.ps1
+. $PSScriptRoot\Get-SPRSearchComponents.ps1
 
 <#
     #$PSScriptRoot\Export-SPRServiceInstance.ps1
@@ -109,7 +110,7 @@
     . $PSScriptRoot\Get-SPRProxyConfiguration.ps1
     . $PSScriptRoot\Get-SPRQuotaTemplates.ps1
     . $PSScriptRoot\Get-SPRSearchAuthoritativePages.ps1
-    . $PSScriptRoot\Get-SPRSearchComponents.ps1
+
     . $PSScriptRoot\Get-SPRSearchContentSources.ps1
     . $PSScriptRoot\Get-SPRSearchContentSourcesStartAddresses.ps1
     . $PSScriptRoot\Get-SPRSearchCrawlStores.ps1
