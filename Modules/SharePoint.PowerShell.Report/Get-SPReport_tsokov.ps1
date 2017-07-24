@@ -30,11 +30,21 @@
 
    $title = 'Search Components'  
    $object = Get-SPRSearchComponents -SPREnterpriseSearchServiceApplications $SPRObjects.SPREnterpriseSearchServiceApplication
-   $properties = 'ServiceApplication', 'ServiceApplicationID','ActiveTopology','Name','Server'
+   $properties = 'ServiceApplication', 'ServiceApplicationID','ActiveTopology','Name','Server','IndexRootDirectory'
    $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
 
 
   #endregion 7.3.2.11	SEARCH COMPONENTS
+
+  #region       7.3.4	SERVICE APPLICATIONS LIST
+
+   $title = 'Service Applications List'  
+   $object = Get-SPRServiceApplicationsList -SPRServiceApplications $SPRObjects.SPRServiceApplication
+   $properties = 'Name','TypeName', 'Status','ApplicationPool','ApplicationPoolAccount','Databases'
+   $fragments += Get-SPReportFragment -Title $title -Object $object -Properties $properties
+
+
+  #endregion
 
   <#
       
@@ -237,7 +247,7 @@
       -PreContent "<h2>$title</h2>" `
       -Properties ServiceApplication, UserProfileCount
   
-      7.3.4	SERVICE APPLICATIONS LIST
+
   
       7.3.5	APPLICATION PROXIES
   

@@ -17,6 +17,7 @@
       'ServiceApplication' = $SPREnterpriseSearchServiceApplication.Name
       'ServiceApplicationID' = $SPREnterpriseSearchServiceApplication.ID
       'Server'           = $SearchComponent.ServerName
+      'IndexRootDirectory' = $SearchComponent.RootDirectory
 
     }
     $object = New-Object -TypeName PSObject -Property $properties

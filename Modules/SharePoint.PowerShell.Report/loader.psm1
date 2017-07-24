@@ -18,6 +18,7 @@
 . $PSScriptRoot\Export-SPRSite.ps1
 . $PSScriptRoot\Export-SPREnterpriseSearchServiceApplication.ps1
 . $PSScriptRoot\Export-SPRFeature.ps1
+. $PSScriptRoot\Export-SPRServiceApplicationConfiguration.ps1
 
 # helper commands
 . $PSScriptRoot\Get-SPReport_tsokov.ps1
@@ -49,6 +50,7 @@
 . $PSScriptRoot\Get-SPRWebApplicationManagedPaths.ps1
 . $PSScriptRoot\Get-SPRSearchManagedProperties.ps1
 . $PSScriptRoot\Get-SPRSearchComponents.ps1
+. $PSScriptRoot\Get-SPRServiceApplicationsList.ps1
 
 <#
     #$PSScriptRoot\Export-SPRServiceInstance.ps1
@@ -132,7 +134,7 @@
     . $PSScriptRoot\Get-SPRServiceApplicationPermissions.ps1
     . $PSScriptRoot\Get-SPRServiceApplicationProxies.ps1
     . $PSScriptRoot\Get-SPRServiceApplicationProxyGroups.ps1
-    . $PSScriptRoot\Get-SPRServiceApplicationsList.ps1
+
 
     . $PSScriptRoot\Get-SPRSharePointBuild.ps1
     . $PSScriptRoot\Get-SPRSharePointDesignerSettings.ps1
@@ -189,6 +191,6 @@
     . $PSScriptRoot\Get-SPRSearchTopologies
     . $PSScriptRoot\Export-SPRQuotaTemplates.ps1
     . $PSScriptRoot\Export-SPREnterpriseSearchServiceApplicationInstance.ps1
-    . $PSScriptRoot\Export-SPRServiceApplicationConfiguration.ps1
+    
 
 #>
